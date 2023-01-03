@@ -18,7 +18,7 @@ export const App = () => {
   const [status, setStatus] = useState('start');
   const [modalURL, setModalURL] = useState(null);
   const totalPages = 12;
-  
+
   useEffect(() => {
     try {
       if (!query) {
@@ -34,7 +34,6 @@ export const App = () => {
         );
         setImages(state => [...state, ...findedImages]);
         setCanLoadMore(totalPages === findedImages.length);
-        console.log(totalPages, findedImages.length);
         setStatus(findedImages.length > 0 ? 'success' : 'not found');
       })();
     } catch (error) {
@@ -96,4 +95,3 @@ export const App = () => {
     </div>
   );
 };
-

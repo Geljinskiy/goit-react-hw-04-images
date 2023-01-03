@@ -6,18 +6,17 @@ import '../../styles/styles.css';
 
 export const Modal = ({ largeImageURL, closeModal }) => {
   useEffect(() => {
+    const onKey = ev => {
+      if (ev.code === 'Escape') {
+        closeModal();
+      }
+    };
     window.addEventListener('keydown', onKey);
 
     return () => {
       window.removeEventListener('keydown', onKey);
     };
-  }, []);
-
-  function onKey(ev) {
-    if (ev.code === 'Escape') {
-      closeModal();
-    }
-  }
+  }, [closeModal]);
 
   function onBackdropClick(ev) {
     const { currentTarget, target } = ev;
