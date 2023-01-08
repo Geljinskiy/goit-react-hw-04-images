@@ -26,7 +26,7 @@ export const App = () => {
       }
       setStatus('load');
 
-      (async () => {
+      const fetchImages = async () => {
         const { findedImages } = await api.getImages(
           query,
           totalPages,
@@ -35,18 +35,20 @@ export const App = () => {
         setImages(state => [...state, ...findedImages]);
         setCanLoadMore(totalPages === findedImages.length);
         setStatus(findedImages.length > 0 ? 'success' : 'not found');
-      })();
+      };
+
+      fetchImages();
     } catch (error) {
       console.log('error :', error);
     }
-  }, [query, currentPage, totalPages]);
+  }, [currentPage, query]);
 
-  useEffect(() => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth',
-    });
-  });
+  // useEffect(() => {
+  //   window.scrollTo({
+  //     top: document.body.scrollHeight,
+  //     behavior: 'smooth',
+  //   });
+  // });
 
   const onFormSubmit = value => {
     //assign new query and set current page as default
